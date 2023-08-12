@@ -1,0 +1,7 @@
+**/nytaxi_postgres_data/*
+**/nytaxi_taxi_postgres_data/*
+**/data_pgadmin/*
+**/logs/
+**.env
+.ipynb_checkpoints/
+*/venv/*
