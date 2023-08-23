@@ -92,3 +92,4 @@
     ```
 3. Create requirements.txt inside the airflow folder and add dependencies as Repo
 4. Create scripts folder inside the airflow folder and inside it create a entrypoint.sh file (paste dependencies from Repo)
+ use to build airflow container image.
