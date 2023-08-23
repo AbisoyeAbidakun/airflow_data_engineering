@@ -93,3 +93,17 @@
 3. Create requirements.txt inside the airflow folder and add dependencies as Repo
 4. Create scripts folder inside the airflow folder and inside it create a entrypoint.sh file (paste dependencies from Repo)
  use to build airflow container image.
+5. Run
+  ``` bash
+  docker-compose build
+  ```
+6. Run
+  ``` bash
+  docker-compose up airflow-init
+  ```
+7. Run
+  ``` bash
+  docker-compose up
+  ```
+8. Inside dags/plugins folder create a web folder
+9. Inside web folder, create operators folder
