@@ -107,3 +107,12 @@
   ```
 8. Inside dags/plugins folder create a web folder
 9. Inside web folder, create operators folder
+
+## Creating Custom Hook and Operators
+
+1. Update the requirements.txt file for the docker container with:
+   ```
+  apache-airflow-providers-http
+  apache-airflow-providers-dbt-cloud
+  ```
+2. Rebuild docker-image
