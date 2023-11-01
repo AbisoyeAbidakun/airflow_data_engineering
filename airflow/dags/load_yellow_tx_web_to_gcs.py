@@ -34,7 +34,7 @@ with DAG(
     default_args=DEFAULT_ARGS,
     schedule_interval="0 6 2 * *",
     max_active_runs=1,
-    catchup=True,
+    catchup=True, #False
     tags=["Website-to-GCS-Bucket"],
 ) as dag:
     start = EmptyOperator(task_id="start")

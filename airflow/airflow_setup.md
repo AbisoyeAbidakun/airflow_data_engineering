@@ -11,7 +11,7 @@
 1.  On Linux, the quick-start needs to know your host user-id and needs to have group id set to 0.
     Otherwise the files created in `dags`, `logs` and `plugins` will be created with root user.
 
-2.  Create directory using:
+2.  Create directory using: run this on the terminal
 
     ```bash
     mkdir -p ./dags ./logs ./plugins
@@ -26,17 +26,43 @@
     AIRFLOW_UID=50000
     ```
 
-3. Download or import the docker setup file from airflow's website
+3. Download or import the docker setup file from airflow's website : Run this on terminal
 
    ```bash
    curl -LfO 'https://airflow.apache.org/docs/apache-airflow/stable/docker-compose.yaml'
    ```
 4. Create "Dockerfile" use to build airflow container image.
-5. Build image: docker-compose build
-6. Initialize airflow db; docker-compose up airflow-init
-7. Initialize all the other services: docker-compose up
-8. Connect external postgres container to the airflow container by assigning the airflow_defult netwrk to the pgres container: see the yaml file
-9. Check for postgres db access from the airflow container.
+5.  Add this to the Dockerfile:
+```
+
+FROM apache/airflow:2.6.3
+# For local file running
+RUN pip install --no-cache-dir "apache-airflow==${AIRFLOW_VERSION}" pandas sqlalchemy psycopg2-binary
+USER root
+RUN apt-get update \
+&& apt-get install -y --no-install-recommends \
+vim \
+&& apt-get autoremove -yqq --purge \
+&& apt-get clean \
+&& rm -rf /var/lib/apt/lists/*
+WORKDIR $AIRFLOW_HOME
+USER $AIRFLOW_UID
+
+```
+6. Go into the docker-compose.yaml file for the airflow and replace the build context with:
+```
+ build:
+    context: .
+    dockerfile: ./Dockerfile
+
+```
+7. Save all the modified files
+
+8. Build image: docker-compose build
+9. Initialize airflow db; docker-compose up airflow-init
+10. Initialize all the other services: docker-compose up
+11. Connect external postgres container to the airflow container by assigning the airflow_defult netwrk to the pgres container: see the yaml file
+12. Check for postgres db access from the airflow container.
 
 
 ### SetUp GCP for Local System (Local Environment Oauth-authentication)
@@ -116,3 +142,20 @@
   apache-airflow-providers-dbt-cloud
   ```
 2. Rebuild docker-image
+3. Build Hook
+4. Extra: {
+    "client_credentials": "",
+    "client_id": "",
+    "client_secret": "",
+    "refresh_token": "",
+    "grant_type": "refresh_token",
+    "scope": "user-read-recently-played"
+    }
+
+How to edit the airflow.cfg file
+5. docker exec -it work_container_id bash
+6. cp /opt/airflow/airflow.cfg /opt/airflow/dags
+7. Move the airflow.cfg file out into the same folder as the config
+8. Add this to the docker-compose.yaml file : - ./airflow.cfg:/opt/airflow/airflow.cfg  or - ${AIRFLOW_PROJ_DIR:-.}/airflow.cfg:/opt/airflow/airflow.cfg
+9. Now edit the airflow.cfg file as you wish, then
+10. Run docker-compose restart or the other way

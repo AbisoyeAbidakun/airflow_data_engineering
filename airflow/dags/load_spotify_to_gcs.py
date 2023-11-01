@@ -5,11 +5,10 @@ from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.operators.empty import EmptyOperator
 
-from spotifyOps import SpotifyToGCSOperator
+from spotify_operator import SpotifyToGCSOperators
 
 
 AIRFLOW_HOME = os.environ.get("AIRFLOW_HOME", "/opt/airflow/")
-
 
 
 DEFAULT_ARGS = {
@@ -38,8 +37,7 @@ with DAG(
 ) as dag:
     start = EmptyOperator(task_id="start")
 
-
-    download_to_gcs= SpotifyToGCSOperator(
+    download_to_gcs= SpotifyToGCSOperators(
         task_id="download_to_gcs",
         days_ago=7,
         destination_path=DESTINATION_PATH,

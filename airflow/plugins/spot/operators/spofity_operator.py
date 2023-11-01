@@ -6,11 +6,10 @@ import json
 import pandas as pd
 from airflow.models import BaseOperator
 from airflow.providers.google.cloud.hooks.gcs import GCSHook
-from spotifyhook import SpotifyHook
+from spotifyhook_ import Spotifyhook
 
 
-
-class SpotifyToGCSOperator(BaseOperator):
+class SpotifyToGCSOperators(BaseOperator):
     """
     Export files to Google Cloud Storage from Spotify
 
@@ -102,7 +101,7 @@ class SpotifyToGCSOperator(BaseOperator):
          self._copy_single_object(gcs_hook, spotify_hook)
 
 
-    def _copy_single_object(self, gcs_hook: GCSHook, spotify_hook: SpotifyHook) -> None:
+    def _copy_single_object(self, gcs_hook: GCSHook, spotify_hook: Spotifyhook) -> None:
         """Helper function to copy single files from spotify to GCS """
         self.log.info(
             "Executing export of file from %s to gs://%s/%s",

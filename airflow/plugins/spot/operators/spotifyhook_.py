@@ -1,10 +1,10 @@
-from typing import Any, Dict, Optional, str
+from typing import Any, Dict, Optional
 
 from airflow.exceptions import AirflowException
 from airflow.providers.http.hooks.http import HttpHook
 from requests_oauthlib import OAuth2Session
 
-class SpotifyHook(HttpHook):
+class Spotifyhook(HttpHook):
 
     """
     Interact with Spotify APIs.
