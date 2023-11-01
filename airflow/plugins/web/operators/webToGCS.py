@@ -74,7 +74,7 @@ class WebToGCSOperator(BaseOperator):
                 # read it back into a parquet file
                 df = pd.read_csv(f'{tmpdirname}/{self.destination_path}', encoding='utf-8')
                 file_name=self.destination_path
-                file_name = file_name.replace('.csv.gz', '.parquet')
+                file_name = file_name.replace('.csv.gz', '.parque  ')
 
                 # yellow_tripdata_2021-01.parquet
                 df.to_parquet(f'{tmpdirname}/{file_name}', engine='pyarrow')

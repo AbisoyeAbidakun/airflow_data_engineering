@@ -98,3 +98,43 @@ networks:
     PG_DATABASE: "******"
 
 4. Spin up the airflow container and the postgres container
+
+***DBT***
+## Install dbt core
+1. Create a folder called dbt
+2. Create requirements.txt
+3. Paste inside the  requirements.txt: dbt-bigquery==1.6.0 (save)
+4. Run: pip install -r requirements.txt
+5. Install extensions :Add to GIT Ignore, YAML, Better Jinja
+6. In the dbt folder create a .gitignore file and paste this inside it
+```
+/venv
+.user.yml
+/logs
+logs
+```
+**DBT-for-bigquery-set-up**
+1. Set up dbt via command line: from https://docs.getdbt.com/docs/core/connect-data-platform/bigquery-setup#local-oauth-gcloud-setup
+2. Authenticate Big-Query - Run this line:
+3.
+```
+gcloud auth application-default login \
+  --scopes=https://www.googleapis.com/auth/bigquery,\
+https://www.googleapis.com/auth/drive.readonly,\
+https://www.googleapis.com/auth/iam.test
+
+```
+For windows
+```
+gcloud auth application-default login --scopes=https://www.googleapis.com/auth/bigquery,https://www.googleapis.com/auth/drive.readonly,https://www.googleapis.com/auth/iam.test
+```
+.osx|.windows|.linux
+
+**CREATING A NEW DBT PROJECT**
+-- Activate the dbt venv environment
+1. Get into a new project
+2. Run: "
+```
+dbt init
+```
+ to create a project : input a name

@@ -3,7 +3,6 @@ import logging
 from datetime import datetime, timedelta
 
 from airflow import DAG
-#from airflow.utils.task_group import TaskGroup
 from airflow.decorators import task
 from airflow.operators.empty import EmptyOperator
 
