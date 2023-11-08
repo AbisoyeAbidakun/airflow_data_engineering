@@ -45,7 +45,11 @@ with models.DAG(
 
 	#load_gcs_big_staging
 
+	#added another line
+
 	# added new file
+
+	# portfolio investment
 
 	load_to_staging = BigQueryExecuteQueryOperator(
 		task_id = "load_to_staging",
