@@ -13,7 +13,7 @@ from airflow.providers.dbt.cloud.sensors.dbt import DbtCloudJobRunSensor
 
 
 AIRFLOW_HOME = os.environ.get("AIRFLOW_HOME", "/opt/airflow/")
-BASE_PATH = Path(__file__).parents[1]
+BASE_PATH = Path(__file__).parents[1] #file hi python
 PROJECT_ID = os.environ.get("GCP_PROJECT_ID")
 TAG="monthly_web_campaign_analytics"
 ENV="prod"
@@ -41,9 +41,16 @@ with models.DAG(
 ) as dag:
 	start = EmptyOperator(task_id="start")
 
+	#load_mongodb_gcs
+
+	#load_gcs_big_staging
+
+	# added new file
+
 	load_to_staging = BigQueryExecuteQueryOperator(
 		task_id = "load_to_staging",
 		sql="/sql/bigquery_to_bigquery/monthly_web_campaign_analytics.sql",
+		#destination_dataset_table="(<project>.|<project>:)<dataset>.<table>"
 		use_legacy_sql=False,
 	)
 
@@ -55,7 +62,7 @@ with models.DAG(
 
 		run_dbt_job = DbtCloudRunJobOperator(
 			task_id="run_dbt_job",
-			dbt_cloud_conn_id="dbt_conn_prod" ,
+			dbt_cloud_conn_id="dbt_conn_prod" , #SERVICE TOKEN
 			job_id="448011",
 			account_id="212662",
 		)
