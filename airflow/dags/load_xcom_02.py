@@ -37,7 +37,7 @@ with DAG(
 
 	@task(task_id="task_1", provide_context=True)
 	def function_fun(**context):
-		List_of_people_in_class  = ["Vanessa","Onu","Saeed","Peter","Rasheed", "Gospel","Bolu"]
+		List_of_people_in_class  = ["Vanessa","Onu","Saeed","Peter","Rasheed"]
 		ti = context["task_instance"]
 		end_date = context["data_interval_end"]
 		end_date_format = datetime.strptime(f"{end_date}","%Y-%m-%dT%H:%M:%S%z").strftime("%Y-%m-%d")
